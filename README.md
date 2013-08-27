@@ -8,7 +8,7 @@ Out of the box JCDCoreData assumes your data model is named after your app. It a
 
 ## Getting Started
 
-1. Create a new project (make sure 'Use Core Data' is not checked)
+1. Create a new project (make sure 'Use Core Data' is not checked) and drag JCDCoreData.h/m into the source list
 2. Add the CoreData framework to your new project
 3. Add a data model to your project and name it exactly like your app name ("MyApp" = "MyApp.xcodemodeld")
 4. Add some entities
