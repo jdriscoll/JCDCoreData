@@ -2,6 +2,12 @@
 //
 // Copyright (c) 2013 Justin Driscoll (http://jdriscoll.org)
 //
+// Category methods adapted from work by by Matt Gallagher:
+// http://www.cocoawithlove.com/2008/03/core-data-one-line-fetch.html
+//
+// and Craig Hockenberry:
+// http://furbo.org/2012/04/05/core-data-without-fetch-requests/
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
@@ -126,7 +132,7 @@
                                               otherButtonTitles:nil];
         [alert show];
     }
-    
+
     return persistentStoreCoordinator;
 }
 
