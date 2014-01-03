@@ -51,7 +51,7 @@
 
 + (NSString *)modelFilename
 {
-    return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+    return @"Model";
 }
 
 + (NSString *)databaseFilename
@@ -239,8 +239,13 @@
 
 @implementation NSManagedObject (JCDCoreData)
 
-+ (NSString *)entityName
++ (NSString *)entityNameString
 {
+    if ([self respondsToSelector:@selector(entityName)]) {
+        Class <EntityNameAwareClass> ModelClass = self;
+        return [ModelClass entityName];
+    }
+
     return NSStringFromClass([self class]);
 }
 
@@ -251,22 +256,22 @@
 
 + (NSArray *)fetchObjectsInContext:(NSManagedObjectContext *)context sortedBy:(NSArray *)sortDescriptors withPredicate:(NSPredicate *)predicate
 {
-    return [context fetchObjectsWithEntityName:[self entityName] sortedBy:sortDescriptors withPredicate:predicate];
+    return [context fetchObjectsWithEntityName:[self entityNameString] sortedBy:sortDescriptors withPredicate:predicate];
 }
 
 + (NSUInteger)fetchCountInContext:(NSManagedObjectContext *)context withPredicate:(NSPredicate *)predicate
 {
-    return [context fetchCountWithEntityName:[self entityName] andPredicate:predicate];
+    return [context fetchCountWithEntityName:[self entityNameString] andPredicate:predicate];
 }
 
 + (instancetype)fetchFirstObjectInContext:(NSManagedObjectContext *)context sortedBy:(NSArray *)sortDescriptors withPredicate:(NSPredicate *)predicate
 {
-    return [context fetchFirstObjectWithEntityName:[self entityName] sortedBy:sortDescriptors withPredicate:predicate];
+    return [context fetchFirstObjectWithEntityName:[self entityNameString] sortedBy:sortDescriptors withPredicate:predicate];
 }
 
 + (instancetype)newObjectInContext:(NSManagedObjectContext *)context
 {
-    return [context insertNewObjectWithEntityName:[self entityName]];
+    return [context insertNewObjectWithEntityName:[self entityNameString]];
 }
 
 @end

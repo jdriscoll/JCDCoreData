@@ -61,9 +61,13 @@
 
 #pragma mark - NSManagedObject additions
 
+@protocol EntityNameAwareClass
++ (NSString *)entityName; // Mogenerator inserts a class method to return the actual entity name without guessing
+@end
+
 @interface NSManagedObject (JCDCoreData)
 
-+ (NSString *)entityName;
++ (NSString *)entityNameString;
 + (NSArray *)fetchAllInContext:(NSManagedObjectContext *)context;
 + (NSArray *)fetchObjectsInContext:(NSManagedObjectContext *)context sortedBy:(NSArray *)sortDescriptors withPredicate:(NSPredicate *)predicate;
 + (NSUInteger)fetchCountInContext:(NSManagedObjectContext *)context withPredicate:(NSPredicate *)predicate;
